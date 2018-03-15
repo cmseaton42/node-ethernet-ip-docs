@@ -1,4 +1,5 @@
 const webpack = require("webpack");
+const path = require("path");
 const marked = require("marked");
 const highlight = require("highlight");
 
@@ -12,26 +13,10 @@ module.exports = {
                 use: ["babel-loader"]
             },
             {
-                test: /\.md$/,
+                test: /\.docthat$/,
                 use: [
                     {
-                        loader: "html-loader"
-                    },
-                    {
-                        loader: "markdown-loader",
-                        options: {
-                            renderer: new marked.Renderer(),
-                            gfm: true,
-                            tables: true,
-                            breaks: false,
-                            pedantic: false,
-                            sanitize: false,
-                            smartLists: true,
-                            smartypants: false,
-                            highlight: function(code) {
-                                return highlight.highlightAuto(code).value;
-                            }
-                        }
+                        loader: path.resolve(__dirname, "./loaders/doc-loader.js")
                     }
                 ]
             }
