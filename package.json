@@ -5,7 +5,9 @@
     "main": "index.js",
     "keywords": [],
     "scripts": {
-        "start": "webpack-dev-server --open --config ./webpack.config.js --mode development"
+        "start": "webpack-dev-server --open --config ./webpack.config.js --mode development",
+        "clean": "rimraf dist",
+        "build": "set NODE_ENV=production && npm run clean && webpack -p"
     },
     "babel": {
         "presets": [
