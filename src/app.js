@@ -11,6 +11,6 @@ export default class App extends Component {
     }
 
     render() {
-        return <div>{ JSON.stringify(this.state.tree) }</div>;
+        return <div></div>;
     }
 }
