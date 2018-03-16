@@ -19,6 +19,10 @@ module.exports = {
                         loader: path.resolve(__dirname, "./loaders/doc-loader.js")
                     }
                 ]
+            },
+            {
+                test: /\.(css|scss)$/,
+                use: ["style-loader", "css-loader", "sass-loader"]
             }
         ]
     },
@@ -33,6 +37,7 @@ module.exports = {
     plugins: [new webpack.HotModuleReplacementPlugin()],
     devServer: {
         contentBase: "./dist",
-        hot: true
+        hot: true,
+        overlay: true
     }
 };

@@ -30,7 +30,6 @@ module.exports = function(source) {
 
     const parsed = parseTree(tree.children);
 
-    console.log(parsed);
     return `export default ${JSON.stringify(parsed)}`;
 };
 
