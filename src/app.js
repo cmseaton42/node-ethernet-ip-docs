@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import tree from "../.docthat";
 
 import "./style.scss";
+
 export default class App extends Component {
     constructor() {
         super();
@@ -10,6 +11,6 @@ export default class App extends Component {
     }
 
     render() {
-        return <h1>hello world</h1>
+        return <div>{ JSON.stringify(this.state.tree) }</div>;
     }
 }
