@@ -1,0 +1,138 @@
+@import "../../../assets/global/_colors.scss";
+@import "../../../assets/global/_mediaQuery.scss";
+.cover {
+    position: relative;
+    margin: 0px;
+    margin-top: -20px;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 450px;
+    background: #dbdbdb;
+    overflow: hidden;
+    text-align: center;
+    .cover-greeting {
+        z-index: 5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 600px;
+        .cover-head {
+            display: flex;
+            h1 {
+                color: #484848;
+                font-size: 85px;
+                line-height: 65px;
+                margin: 0px;
+            }
+            img {
+                height: 65px;
+                padding-right: 10px;
+            }
+        }
+        p {
+            font-size: 28px;
+            color: $color_blue;
+        }
+        .cover-button {
+            width: 170px;
+            height: 50px;
+            line-height: 50px;
+            background: $color_main;
+            color: $color_blue;
+            color: white;
+            font-size: 22px;
+            transition: all 250ms ease-in-out;
+            &:hover {
+                cursor: pointer;
+                transform: translateY(-3px);
+                transition: all 250ms ease-in-out;
+            }
+        }
+    }
+    .cover-logo {
+        position: absolute;
+        right: 15%;
+        bottom: -10px;
+        img {
+            height: 450px;
+        }
+    }
+}
+
+@media (max-width: $breakpoint-med-tablet) {
+    .cover {
+        height: 350px;
+        background: #dbdbdb;
+        .cover-greeting {
+            width: 500px;
+            .cover-head {
+                h1 {
+                    font-size: 70px;
+                    line-height: 55px;
+                }
+                img {
+                    height: 53px;
+                }
+            }
+            p {
+                font-size: 20px;
+                color: $color_blue;
+            }
+            .cover-button {
+                width: 170px;
+                height: 50px;
+                line-height: 50px;
+                font-size: 22px;
+            }
+        }
+        .cover-logo {
+            position: absolute;
+            right: 5%;
+            bottom: -10px;
+            img {
+                height: 350px;
+            }
+        }
+    }
+}
+
+@media (max-width: $breakpoint-phones) {
+    .cover {
+        height: 250px;
+        background: #dbdbdb;
+        .cover-greeting {
+            width: 350px;
+            .cover-head {
+                h1 {
+                    font-size: 50px;
+                    line-height: 45px;
+                }
+                img {
+                    height: 41px;
+                    padding-right: 5px;
+                }
+            }
+            p {
+                font-size: 16px;
+                color: $color_blue;
+            }
+            .cover-button {
+                width: 130px;
+                height: 40px;
+                line-height: 40px;
+                font-size: 18px;
+            }
+        }
+        .cover-logo {
+            position: absolute;
+            right: 5px;
+            bottom: 0px;
+            img {
+                height: 250px;
+            }
+        }
+    }
+}

@@ -19,33 +19,52 @@ marked.setOptions({
 });
 
 module.exports = function(source) {
-    const { docdir } = JSON.parse(source);
-    const docPath = path.resolve(docdir);
+    const src = JSON.parse(source);
+    const site_path = path.resolve(src.site_root);
 
-    this.addDependency(docPath);
+    this.addDependency(site_path);
 
-    const tree = dirTree(docPath, {
-        extensions: /\.md$/
-    });
+    src.content = parseTree(dirTree(site_path, { extensions: /\.md$/ }).children);
 
-    const parsed = parseTree(tree.children);
+    let config = {
+        name: src.name,
+        repo_link: src.repo_link,
+        version: src.version
+    }
 
-    return `export default ${JSON.stringify(parsed)}`;
+    config.nav = [];
+    config.content = {};
+
+    for (let dir of src.content) {
+        const { type } = dir;
+
+        if (type === "directory") {
+            const { name, files } = dir;
+            config.nav.push(name);
+            config.content[name] = files;
+        }
+    }
+
+
+    return `export default ${JSON.stringify(config)}`;
 };
 
 const parseTree = children => {
     let arr = [];
-    const reg = /^(\d+\w-)/;
+    const reg = /^(\d+\s*-\s*)/;
 
     for (let item of children) {
         let file = {};
         if (item.type === "directory") {
+            file.type = "directory";
             file.files = parseTree(item.children);
         } else {
-            file.name = item.name.replace(item.extension, "");
-            file.name = file.name.replace(reg, "");
+            file.type = "file";
             file.html = marked(fs.readFileSync(item.path, { encoding: "utf-8" }));
         }
+
+        file.name = item.name.replace(item.extension, "");
+        file.name = file.name.replace(reg, "");
 
         arr.push(file);
     }

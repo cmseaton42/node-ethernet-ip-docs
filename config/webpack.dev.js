@@ -3,7 +3,6 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const autoprefixer = require("autoprefixer");
 
-
 module.exports = {
     entry: {
         bundle: "./src/index.js"
@@ -18,7 +17,14 @@ module.exports = {
             {
                 use: "babel-loader",
                 test: /\.js$/,
-                exclude: /node_modules/
+                exclude: [/\.docthat$/, /node_modules/]
+            },
+            {
+                test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+                loader: "url-loader",
+                options: {
+                    limit: 25000
+                }
             },
             {
                 use: "json-loader",
@@ -28,7 +34,7 @@ module.exports = {
                 test: /\.docthat$/,
                 use: [
                     {
-                        loader: path.resolve(__dirname, "./loaders/doc-loader.js")
+                        loader: path.resolve(__dirname, "./loaders/doc-loader")
                     }
                 ]
             },
@@ -61,7 +67,17 @@ module.exports = {
                 ]
             },
             {
-                exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.scss$/, /\.json$/, /\.docthat$/],
+                exclude: [
+                    /\.(js|jsx|mjs)$/,
+                    /\.html$/,
+                    /\.scss$/,
+                    /\.json$/,
+                    /\.docthat$/,
+                    /\.bmp$/,
+                    /\.gif$/,
+                    /\.jpe?g$/,
+                    /\.png$/
+                ],
                 loader: "file-loader",
                 options: {
                     name: "static/media/[name].[hash:8].[ext]"

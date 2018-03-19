@@ -1,0 +1,179 @@
+@import "../../assets/global/_colors.scss";
+@import "../../assets/global/_mediaQuery.scss";
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #222222;
+    height: 60px;
+    width: 100%;
+    margin: 0px;
+    color: white;
+    font-family: sans-serif;
+    font-size: 20px;
+    .nav-logo {
+        color: white;
+        width: 15%;
+        text-align: center;
+        font-weight: 400;
+        margin-left: 15px;
+        display: flex;
+        align-items: center;
+        cursor: default;
+        img {
+            height: 35px;
+        }
+        a {
+            color: white;
+            padding-left: 7px;
+            transition: all 200ms ease-in-out;
+            &:hover {
+                color: $color_main;
+                cursor: pointer;
+                transition: all 200ms ease-in-out;
+            }
+            &.active {
+                color: $color_main;
+                transition: all 200ms ease-in-out;
+            }
+        }
+    }
+    .nav-site-links {
+        display: flex;
+        align-items: center;
+        font-size: 18px;
+        width: 45%;
+        height: 100%;
+        a {
+            display: block;
+            color: white;
+            height: 100%;
+            text-align: center;
+            line-height: 60px;
+            padding: 0px 20px;
+            box-sizing: border-box;
+            &:hover {
+                background: #414141;
+                cursor: pointer;
+                color: $color_main;
+                border-bottom: 4px solid $color_main;
+                transition: all 200ms ease-in-out;
+            }
+            &.active {
+                background: #414141;
+                color: white;
+                transition: color 500ms ease-in-out;
+                border-bottom: 4px solid $color_main;
+            }
+        }
+    }
+    .nav-info {
+        font-size: 18px;
+        color: white;
+        text-align: right;
+        margin-right: 40px;
+        cursor: default;
+        a {
+            color: white;
+            padding: 0px 10px;
+            &:hover {
+                cursor: pointer;
+                color: $color_main;
+            }
+        }
+        span {
+            font-size: 14px;
+            color: $color_main;
+            font-weight: bold;
+        }
+    }
+}
+
+@media (max-width: 1000px) {
+    .navbar {
+        font-size: 20px;
+        .nav-logo {
+            width: 30%;
+        }
+    }
+}
+
+@media (max-width: $breakpoint-med-tablet) {
+    .navbar {
+        height: 45px;
+        font-size: 16px;
+        .nav-logo {
+            width: 30%;
+            img {
+                height: 25px;
+            }
+            a {
+                color: white;
+                padding-left: 7px;
+                transition: all 200ms ease-in-out;
+                &:hover {
+                    color: $color_main;
+                    cursor: pointer;
+                    transition: all 200ms ease-in-out;
+                }
+                &.active {
+                    color: $color_main;
+                    transition: all 200ms ease-in-out;
+                }
+            }
+        }
+        .nav-site-links {
+            align-items: center;
+            font-size: 16px;
+            a {
+                line-height: 45px;
+                padding: 0px 15px;
+            }
+        }
+        .nav-info {
+            margin-right: 20px;
+            a {
+                font-size: 16px;
+                padding: 0px 8px;
+            }
+            span {
+                font-size: 11px;
+            }
+        }
+    }
+}
+
+@media (max-width: $breakpoint-phones) {
+    .navbar {
+        height: 35px;
+        font-size: 16px;
+        .nav-logo {
+            width: 22px;
+            margin-left: 3px;
+            a {
+                display: none;
+            }
+            img {
+                height: 22px;
+            }
+        }
+        .nav-site-links {
+            align-items: center;
+            font-size: 14px;
+            a {
+                line-height: 35px;
+                padding: 0px 8px;
+            }
+        }
+        .nav-info {
+            margin-right: 10px;
+            a {
+                font-size: 14px;
+                padding: 0px 5px;
+            }
+            span {
+                font-size: 10px;
+            }
+        }
+    }
+}
