@@ -2,8 +2,9 @@ import React, { Component, Fragment } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import config from "../.docthat";
 
-import Navbar from "../src/components/navbar";
+import Navbar from "./components/navbar";
 import LandingPage from "./views/landing-page";
+import Footer from "./components/footer";
 
 import "./style.scss";
 
@@ -18,8 +19,9 @@ export default class App extends Component {
         return (
             <Router>
                 <Fragment>
-                    <Navbar {...this.state} />;
+                    <Navbar {...this.state} />
                     <Route to="/" exact component={() => <LandingPage {...this.state} />} />
+                    <Footer {...this.state} />
                 </Fragment>
             </Router>
         );
