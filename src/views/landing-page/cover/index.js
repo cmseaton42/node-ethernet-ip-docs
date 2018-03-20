@@ -6,9 +6,10 @@ import logo from "../../../assets/images/logo-grey.png";
 import RJ45 from "../../../assets/images/rj45.png";
 
 const Cover = props => {
-    const { name } = props;
+    const { name, content, nav } = props;
 
-    return <div className="cover">
+    return (
+        <div className="cover">
             <div className="cover-greeting">
                 <div className="cover-head">
                     <img src={RJ45} alt="logo" />
@@ -19,14 +20,18 @@ const Cover = props => {
                         "A simple interface for communicating with Allen Bradly controllers via Ethernet/IP"
                     }
                 </p>
-                <Link className="cover-button" to="/Docs">
+                <Link
+                    className="cover-button"
+                    to={`/${nav[0]}/${content[nav[0]][0].files[0].name}`}
+                >
                     {"Learn More"}
                 </Link>
             </div>
             <div className="cover-logo">
                 <img src={logo} alt="logo" />
             </div>
-        </div>;
+        </div>
+    );
 };
 
 export default Cover;

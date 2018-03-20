@@ -1,0 +1,107 @@
+@import "../../assets/global/_colors.scss";
+@import "../../assets/global/_mediaQuery.scss";
+.document-area {
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    min-height: 750px;
+    height: 100%;
+    display: flex;
+    .sidebar {
+        width: 250px;
+        box-sizing: border-box;
+        overflow: auto;
+        background: #dbdbdb;
+        margin: 0px;
+        padding: 20px 20px 10px 20px;
+        box-shadow: -2px 0px 15px grey;
+        .sidebar-item {
+            h3 {
+                font-size: 18px;
+                color: #5e5d5d;
+                line-height: 25px;
+                margin: 5px 0px 0px 0px;
+                padding: 0px;
+                &:hover {
+                    cursor: default;
+                }
+            }
+            ul {
+                list-style-type: none;
+                padding: 5px 15px 5px 12px;
+                margin: 0px;
+                li {
+                    a {
+                        color: #797979;
+                        transition: all 200ms ease-in-out;
+                        font-size: 16px;
+                        &:hover {
+                            cursor: pointer;
+                            color: $color_blue;
+                            transition: all 250ms ease-in-out;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .content-area {
+        width: 100%;
+        .content-html {
+            padding-left: 40px;
+        }
+    }
+}
+
+@media (max-width: $breakpoint-large-tablet) {
+    .document-area {
+        .sidebar {
+            .sidebar-item {
+                h3 {
+                    font-size: 17px;
+                }
+                ul {
+                    padding: 0px 5px 2px 5px;
+                    li {
+                        a {
+                            font-size: 15px;
+                        }
+                    }
+                }
+            }
+        }
+        .content-area {
+            width: 100%;
+            .content-html {
+                padding-left: 40px;
+            }
+        }
+    }
+}
+
+@media (max-width: $breakpoint-med-tablet) {
+    .document-area {
+        .sidebar {
+
+            .sidebar-item {
+                h3 {
+                    font-size: 17px;
+                }
+                ul {
+                    padding: 0px 5px 2px 5px;
+                    li {
+                        a {
+                            font-size: 15px;
+                        }
+                    }
+                }
+            }
+        }
+        .content-area {
+            width: 100%;
+            .content-html {
+                padding-left: 40px;
+            }
+        }
+    }
+}

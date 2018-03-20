@@ -5,7 +5,7 @@ import "./navbar.scss";
 import rj45 from "../../assets/images/rj45.png";
 
 const Navbar = props => {
-    const { nav, repo_link, version } = props;
+    const { nav, repo_link, version, content } = props;
 
     return (
         <div className="navbar">
@@ -20,7 +20,7 @@ const Navbar = props => {
                     return (
                         <NavLink
                             key={item}
-                            to={`/${item}`}
+                            to={`/${item}/${content[item][0].files[0].name}`}
                             className="nav-link"
                             activeClassName="active"
                         >
