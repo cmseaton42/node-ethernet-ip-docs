@@ -22,7 +22,7 @@ const Cover = props => {
                 </p>
                 <Link
                     className="cover-button"
-                    to={`/${nav[0]}/${content[nav[0]][0].files[0].name}`}
+                    to={`/${nav[0]}`}
                 >
                     {"Learn More"}
                 </Link>

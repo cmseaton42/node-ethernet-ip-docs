@@ -20,7 +20,7 @@ const Navbar = props => {
                     return (
                         <NavLink
                             key={item}
-                            to={`/${item}/${content[item][0].files[0].name}`}
+                            to={`/${item}`}
                             className="nav-link"
                             activeClassName="active"
                         >
