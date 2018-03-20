@@ -10,7 +10,8 @@ module.exports = {
     mode: "development",
     output: {
         path: path.join(__dirname, "../dist"),
-        filename: "[name].[hash:8].js"
+        filename: "[name].[hash:8].js",
+        publicPath: "/"
     },
     module: {
         rules: [
