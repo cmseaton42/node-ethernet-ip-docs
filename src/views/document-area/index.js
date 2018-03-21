@@ -3,6 +3,7 @@ import { NavLink, Route, Switch, Redirect } from "react-router-dom";
 
 import "./document-area.scss";
 import "./code.scss";
+import "./markdown.scss";
 
 export default class DocumentArea extends Component {
     constructor(props) {

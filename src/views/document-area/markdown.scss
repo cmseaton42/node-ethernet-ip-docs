@@ -1,0 +1,80 @@
+@import "../../assets/global/_colors.scss";
+@import "../../assets/global/_mediaQuery.scss";
+.content-html {
+    z-index: -20;
+    code {
+        background: #d6d6d6;
+        padding: 1px 5px;
+        color: #5d5dff;
+        border-radius: 3px;
+    }
+    pre {
+        background: #222222;
+        padding: 15px;
+        overflow-x: auto;
+        border-radius: 5px;
+        color: white;
+        code {
+            background: #222222;
+            line-height: 20px;
+            color: white;
+        }
+    }
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    blockquote {
+        background: #fcd46f;
+        border-left: #f3b10b solid 6px;
+        opacity: .85;
+        margin: 0px;
+        padding: 5px 15px 5px 25px;
+        z-index: -100;
+    }
+    table {
+        color: #333;
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+        td,
+        th {
+            border: 1px solid transparent;
+            /* No more visible border */
+            height: 100%;
+            transition: all 0.3s;
+            /* Simple transition for hover effect */
+        }
+        th {
+            background: $color_main;
+            font-weight: bold;
+            color: white;
+            padding: 5px 10px;
+        }
+        td {
+            background: #FAFAFA;
+            text-align: center;
+            padding: 5px 10px;
+        }
+        /* Cells in even rows (2,4,6...) are one color */
+        tr:nth-child(even) td {
+            background: #b5defa;
+        }
+        /* Cells in odd rows (1,3,5...) are another (excludes header cells)  */
+        tr:nth-child(odd) td {
+            background: #cde8fa;
+        }
+    }
+    /* Hover cell effect! */
+}
+
+@media (max-width: $breakpoint-med-tablet) {
+    .content-html {
+        font-size: 14px;
+        pre {
+            code {
+                line-height: 17px;
+            }
+        }
+    }
+}
