@@ -47,21 +47,22 @@
                             transition: all 200ms ease-in-out;
                             font-size: 16px;
                             &.active {
-                                color: $color_blue;
+                                color: #0185dd;
+                                font-weight: bold;
                             }
                             &.active::after {
                                 content: "";
-                                background: $color_main;
-                                height: 7px;
-                                width: 7px;
+                                background: #0185dd;
+                                height: 6px;
+                                width: 6px;
                                 position: absolute;
-                                right: -12px;
+                                right: -10px;
                                 top: 6px;
                                 border-radius: 50%;
                             }
                             &:hover {
                                 cursor: pointer;
-                                color: $color_blue;
+                                color: #0185dd;
                                 transition: all 250ms ease-in-out;
                             }
                         }

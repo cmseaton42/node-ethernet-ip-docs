@@ -90,7 +90,8 @@ module.exports = {
         contentBase: "dist",
         overlay: true,
         historyApiFallback: true,
-        hot: true
+        hot: true,
+        watchContentBase: true
     },
     plugins: [
         new webpack.NamedModulesPlugin(),
