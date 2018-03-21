@@ -1,20 +1,37 @@
 const dirTree = require("directory-tree");
 const path = require("path");
 const fs = require("fs");
-const marked = require("marked");
-const highlight = require("highlight");
+const remarkable = require("remarkable");
+const hljs = require("highlight.js");
 
-marked.setOptions({
-    renderer: new marked.Renderer(),
-    gfm: true,
-    tables: true,
-    breaks: false,
-    pedantic: false,
-    sanitize: false,
-    smartLists: true,
-    smartypants: false,
-    highlight: function(code) {
-        return highlight.highlightAuto(code).value;
+let md = new remarkable({
+    html: true, // Enable HTML tags in source
+    xhtmlOut: true, // Use '/' to close single tags (<br />)
+    breaks: true, // Convert '\n' in paragraphs into <br>
+    langPrefix: "language-", // CSS language prefix for fenced blocks
+    linkify: false, // Autoconvert URL-like text to links
+
+    // Enable some language-neutral replacement + quotes beautification
+    typographer: true,
+
+    // Double + single quotes replacement pairs, when typographer enabled,
+    // and smartquotes on. Set doubles to '«»' for Russian, '„“' for German.
+    quotes: "“”‘’",
+
+    // Highlighter function. Should return escaped HTML,
+    // or '' if the source string is not changed
+    highlight: (str, lang) => {
+        if (lang && hljs.getLanguage(lang)) {
+            try {
+                return hljs.highlight(lang, str).value;
+            } catch (err) {}
+        }
+
+        try {
+            return hljs.highlightAuto(str).value;
+        } catch (err) {}
+
+        return ""; // use external default escaping
     }
 });
 
@@ -30,7 +47,7 @@ module.exports = function(source) {
         name: src.name,
         repo_link: src.repo_link,
         version: src.version
-    }
+    };
 
     config.nav = [];
     config.content = {};
@@ -44,7 +61,6 @@ module.exports = function(source) {
             config.content[name] = files;
         }
     }
-
 
     return `export default ${JSON.stringify(config)}`;
 };
@@ -60,7 +76,7 @@ const parseTree = children => {
             file.files = parseTree(item.children);
         } else {
             file.type = "file";
-            file.html = marked(fs.readFileSync(item.path, { encoding: "utf-8" }));
+            file.html = md.render(fs.readFileSync(item.path, { encoding: "utf-8" }));
         }
 
         file.name = item.name.replace(item.extension, "");

@@ -7,8 +7,11 @@
             min-height: 800px;
             height: 100%;
             display: flex;
+            position: relative;
+            overflow: hidden;
             .sidebar {
-                width: 850px;
+                width: 40%;
+                min-width: 300px;
                 box-sizing: border-box;
                 overflow: auto;
                 background: #dbdbdb;
@@ -19,7 +22,7 @@
                 flex-direction: column;
                 align-items: flex-end;
                 .sidebar-nav {
-                    padding-right: 20%;
+                    padding-right: 15%;
                     width: 200px;
                     .sidebar-item {
                         align-self: flex-start;
@@ -66,21 +69,32 @@
                         }
                     }
                 }
+                .sidebar-button {
+                    display: none;
+                }
             }
             .content-area {
-                width: 100%;
+                width: 60%;
+                max-width: 800px;
+                padding: 25px;
                 .content-html {
-                    padding-left: 40px;
+                    width: 95%;
+                    max-width: 800px;
                 }
+            }
+            .content-show-button {
+                display: none;
             }
         }
 
         @media (max-width: $breakpoint-large-tablet) {
             .document-area {
+                min-height: 750px;
                 .sidebar {
+                    width: 300px;
                     .sidebar-nav {
-                        padding-right: 10%;
-                        width: 200px;
+                        padding-right: 5%;
+                        width: 170px;
                         .sidebar-item {
                             h3 {
                                 font-size: 17px;
@@ -97,7 +111,7 @@
                     }
                 }
                 .content-area {
-                    width: 100%;
+                    width: 60%;
                     .content-html {
                         padding-left: 40px;
                     }
@@ -107,7 +121,21 @@
 
         @media (max-width: $breakpoint-med-tablet) {
             .document-area {
+                position: relative;
+                min-height: 600px;
                 .sidebar {
+                    transition: all 400ms ease-in-out;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 300px;
+                    height: 4000px;
+                    min-width: 0px;
+                    &.hide {
+                        transition: all 400ms ease-in-out;
+                        width: 0px;
+                        padding: 0px;
+                    }
                     .sidebar-nav {
                         padding-right: 5%;
                         .sidebar-item {
@@ -124,11 +152,58 @@
                             }
                         }
                     }
+                    .sidebar-button {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        position: absolute;
+                        font-size: 20px;
+                        height: 30px;
+                        width: 30px;
+                        right: 10px;
+                        top: 10px;
+                        border-radius: 50%;
+                        color: #5e5d5d;
+                        transition: all 200ms ease-in-out;
+                        &.hide {
+                            transition: all 200ms ease-in-out;
+                        }
+                        &:hover {
+                            cursor: pointer;
+                            color: $color_blue;
+                        }
+                    }
                 }
                 .content-area {
-                    width: 100%;
+                    width: 90%;
                     .content-html {
                         padding-left: 40px;
+                    }
+                }
+                .content-show-button {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position: absolute;
+                    font-size: 20px;
+                    height: 40px;
+                    width: 40px;
+                    right: 15px;
+                    top: 15px;
+                    border-radius: 50%;
+                    color: $color_main;
+                    background: #444444;
+                    transition: all 200ms ease-in-out;
+                    box-shadow: 2px 2px 4px grey;
+                    &.hide {
+                        right: -50px;
+                        transition: all 200ms ease-in-out;
+                    }
+                    &:hover {
+                        cursor: pointer;
+                        transform: translateY(-2px);
+                        transition: all 200ms ease-in-out;
+                        box-shadow: 2px 2px 6px grey;
                     }
                 }
             }
