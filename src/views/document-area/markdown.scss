@@ -13,7 +13,7 @@
         background: #222222;
         padding: 15px;
         overflow-x: auto;
-        border-radius: 5px;
+        border-radius: 3px;
         color: white;
         code {
             background: #222222;
@@ -28,13 +28,13 @@
     blockquote {
         background: #fcd46f;
         border-left: #f3b10b solid 6px;
-        opacity: .85;
-        margin: 0px;
+        opacity: 0.85;
+        margin: 10px 0px 0px 0px;
         padding: 5px 15px 5px 25px;
         z-index: -100;
         code {
-            background: #fcdc8a;
-            color: #332500;
+            background: #fac279;
+            color: #745502;
         }
     }
     a {
@@ -46,11 +46,23 @@
             transition: all 200ms ease-in-out;
         }
     }
+    sup {
+        a {
+            color: #b685fc;
+            font-size: 11px;
+        }
+    }
     table {
         color: #333;
-        width: 100%;
+        
         border-collapse: collapse;
         border-spacing: 0;
+        margin: 10px 0px;
+
+        code {
+            background: transparent;
+            font-style: italic;
+        }
         td,
         th {
             border: 1px solid transparent;
@@ -64,9 +76,15 @@
             font-weight: bold;
             color: white;
             padding: 5px 10px;
+            sup {
+                a {
+                    color: #4e45fd;
+                    font-size: 11px;
+                }
+            }
         }
         td {
-            background: #FAFAFA;
+            background: #fafafa;
             text-align: center;
             padding: 5px 10px;
         }
