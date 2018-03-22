@@ -74,7 +74,7 @@ console.log(tag.<property>); // logs return from property accessor to console
 | generateWriteMessageRequest | Returns a write tag message request buffer   |
 | unstageWriteRequest         | Unstages a write value                       |
 
-### generateReadMessageRequest
+### generateReadMessageRequest(size)
 
 | Arg           | Type   | Default[^fifth] | Description                           |
 | :------------ | :----- | :-------------- | :------------------------------------ |
@@ -84,13 +84,13 @@ console.log(tag.<property>); // logs return from property accessor to console
 | :------ | :----- | :--------------------------------- |
 | ReadMSG | Buffer | Read tag request buffer to be sent |
 
-### parseReadMessageResponse
+### parseReadMessageResponse(data)
 
 | Arg  | Type   | Description       |
 | :--- | :----- | :---------------- |
 | Data | Buffer | Data to be parsed |
 
-### generateWriteMessageRequest
+### generateWriteMessageRequest([value[, size]])
 
 | Arg           | Type   | Default[^fifth] | Description                            |
 | :------------ | :----- | :-------------- | :------------------------------------- |
@@ -105,7 +105,7 @@ console.log(tag.<property>); // logs return from property accessor to console
 | :------- | :----- | :---------------------------------- |
 | WriteMSG | Buffer | Write tag request buffer to be sent |
 
-### unstageWriteRequest
+### unstageWriteRequest()
 
 This method will set the `staged-change` bit to false and reset `value` to `controller_value`.
 
@@ -124,7 +124,7 @@ tag1.on("Initialized", tag => {
     console.log(tag.value);
 });
 
-tag1.on("Changed", tag => {
+tag1.on("Changed", (tag, lastValue) => {
     console.log(tag.value);
 });
 ```

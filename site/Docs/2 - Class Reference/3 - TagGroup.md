@@ -53,7 +53,7 @@ console.log(group.<property>); // logs return from property accessor to console
 | generateWriteMessageRequests | Returns a multi service write request service buffer |
 | parseWriteMessageRequests    | Parses a multi service write response service buffer |
 
-### add
+### add(tag)
 
 | arg | type | default[^first] | description                            |
 | :-- | :--- | :-------------- | :------------------------------------- |
@@ -65,7 +65,7 @@ const group = new TagGroup();
 group.add(new Tag("sampleTag"));
 ```
 
-### remove
+### remove(tag)
 
 | arg | type | default[^first] | description                              |
 | :-- | :--- | :-------------- | :--------------------------------------- |
@@ -75,7 +75,7 @@ group.add(new Tag("sampleTag"));
 group.remove(new Tag("sampleTag"));
 ```
 
-### forEach
+### forEach(callback)
 
 | arg      | type     | default[^first] | description                      |
 | :------- | :------- | :-------------- | :------------------------------- |
@@ -89,7 +89,7 @@ group.forEach(tag => {
 });
 ```
 
-### generateReadMessageRequests
+### generateReadMessageRequests()
 
 | return       | type  | description                                       |
 | :----------- | :---- | :------------------------------------------------ |
@@ -104,14 +104,14 @@ Returned array object structure
 }
 ```
 
-### parseReadMessageResponses
+### parseReadMessageResponses(responses, ids)
 
 | arg       | type  | description                                            |
 | :-------- | :---- | :----------------------------------------------------- |
 | responses | Array | Array of read tag service request responses            |
 | ids       | Array | Array of Tag IDs that were sent in the service request |
 
-### generateWriteMessageRequests
+### generateWriteMessageRequests()
 
 | return        | type  | description                                        |
 | :------------ | :---- | :------------------------------------------------- |
@@ -125,7 +125,7 @@ Returned array object structure
 | :------- | :----- | :---------------------------------- |
 | WriteMSG | Buffer | Write tag request buffer to be sent |
 
-### parseReadMessageResponses
+### parseReadMessageResponses(responses, ids)
 
 | arg       | type  | description                                            |
 | :-------- | :---- | :----------------------------------------------------- |

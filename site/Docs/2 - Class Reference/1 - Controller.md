@@ -94,7 +94,7 @@ console.log(PLC.<property>); // logs return from property accessor to console
 >
 > All `ASYNC` methods that make network requests will timeout after 10s (default)
 
-### connect
+### connect(IP_Addr[, slot])
 
 | Arg     | Type   | Default[^second] | Description                             |
 | :------ | :----- | :--------------- | :-------------------------------------- |
@@ -117,7 +117,7 @@ PLC.connect("192.168.1.1")
     });
 ```
 
-### readControllerProps
+### readControllerProps()
 
 ```js
 // read controller properties
@@ -130,7 +130,7 @@ PLC.readControllerProps()
     });
 ```
 
-### readWallClock[^first]
+### readWallClock()[^first]
 
 ```js
 // read controller wallclock
@@ -143,7 +143,7 @@ PLC.readWallClock()
     });
 ```
 
-### writeWallClock[^first]
+### writeWallClock(date)[^first]
 
 | Arg  | Type | Default[^second] | Description                                     |
 | :--- | :--- | :--------------- | :---------------------------------------------- |
@@ -160,7 +160,7 @@ PLC.writeWallClock()
     });
 ```
 
-### readTag
+### readTag(tag)
 
 | Arg | Type | Default[^second] | Description                           |
 | :-- | :--- | :--------------- | :------------------------------------ |
@@ -179,17 +179,29 @@ PLC.readTag(tag)
     });
 ```
 
-### writeTag
+### writeTag(tag[, value])
 
-| Arg | Type | Default[^second] | Description                       |
-| :-- | :--- | :--------------- | :-------------------------------- |
-| tag | Tag  | n/a              | Tag to write to target controller |
+| Arg   | Type | Default[^second] | Description                                |
+| :---- | :--- | :--------------- | :----------------------------------------- |
+| tag   | Tag  | n/a              | Tag to write to target controller          |
+| value | n/a  | n/a              | Value to written to controller (see below) |
 
 ```js
 // write tag from target
+
+// OPTION 1: schedule a tag to written
 tag.value = 27;
 
 PLC.writeTag(tag)
+    .then(() => {
+        console.log(tag.value);
+    })
+    .catch(e => {
+        console.log(e);
+    });
+
+// OPTION 2: declare value to change to
+PLC.writeTag(tag, 27)
     .then(() => {
         console.log(tag.value);
     })
@@ -202,7 +214,7 @@ PLC.writeTag(tag)
 >
 > If you wish to write a value to a tag you must either provide an explicit type when creating the tag instance or read the tag from the controller before attempting to write.
 
-### readTagGroup
+### readTagGroup(group)
 
 | Arg   | Type     | Default[^second] | Description                                |
 | :---- | :------- | :--------------- | :----------------------------------------- |
@@ -226,7 +238,7 @@ PLC.readTagGroup(group)
     });
 ```
 
-### writeTagGroup
+### writeTagGroup(group)
 
 | Arg   | Type     | Default[^second] | Description                               |
 | :---- | :------- | :--------------- | :---------------------------------------- |
@@ -244,6 +256,83 @@ PLC.writeTagGroup(group)
     .catch(e => {
         console.log(e);
     });
+```
+
+### subscribe(tag)
+
+| Arg | Type | Default[^second] | Description                                   |
+| :-- | :--- | :--------------- | :-------------------------------------------- |
+| tag | Tag  | n/a              | Tag to be registered to controller scan group |
+
+```js
+// Add tag to scan group
+PLC.subscribe(new Tag("someTagToMonitor"));
+
+// monitoring will not begin until PLC.scan() is called
+```
+
+> **NOTE**
+>
+> It is reccommended that the user keep the number of tags to a minimum in the scan group as this will help keep bandwidth consumption to a minimum. For reccommended use of the scan group, see below.
+
+```js
+/* Scan group best practice */
+
+// Build a group to read on handshake change
+const group = new TagGroup();
+group.add("fistTag");
+group.add("secondTag");
+
+// Subscribe to some event tag - we will call it 'handshake'
+const tag = new Tag("handshake");
+PLC.subscribe(tag);
+
+// Begin Scanning
+PLC.scan();
+
+// register change event on handshake
+tag.on("Changed", (tag, lastValue) => {
+    // check against some condition, in this case if handshake is 10
+    if (tag.value === 10) {
+        PLC.readTagGroup(group)
+            .then(() => {
+                // Data has been read, confirm to PLC
+                // by setting handshake to 110 in this case
+                handshake.value = 110;
+            })
+            .catch(e => {
+                // log error
+                console.log(e);
+
+                // Tell PLC a failure occurred, 111 in this case
+                handshake.value = 111;
+            });
+    }
+});
+```
+
+The above usage of the controller scan group allows the user to monitor select tags for a queue to read a group of tags without consuming much bandwidth.
+
+### scan()
+
+This method will begin polling tags of the scan group for changes at the scan rate provided from the user (200 ms default).
+
+### pauseScan()
+
+This method will pause polling of the scan group.
+
+### forEach(callback)
+
+| arg      | type     | default[^first] | description                      |
+| :------- | :------- | :-------------- | :------------------------------- |
+| callback | Function | n/a             | Callback function to handle loop |
+
+```js
+// Iterate over each tag registered to the scan group
+// --> The callback is passed a tag
+PLC.forEach(tag => {
+    console.log(tag.value);
+});
 ```
 
 [^first]: `readWallClock` and `writeWallClock` methods do not work with CompactLogix Controllers
