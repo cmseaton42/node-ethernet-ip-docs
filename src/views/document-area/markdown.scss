@@ -2,6 +2,9 @@
 @import "../../assets/global/_mediaQuery.scss";
 .content-html {
     z-index: -20;
+    hr {
+        margin-top: 25px;
+    }
     code {
         background: #d6d6d6;
         padding: 2px 6px;
