@@ -30,7 +30,7 @@
         "install": "^0.10.4",
         "loader-utils": "^1.1.0",
         "marked": "^0.3.17",
-        "node-sass": "^4.7.2",
+        "node-sass": "^4.9.0",
         "npm": "^5.7.1",
         "postcss": "^6.0.19",
         "postcss-cssnext": "^3.1.0",
